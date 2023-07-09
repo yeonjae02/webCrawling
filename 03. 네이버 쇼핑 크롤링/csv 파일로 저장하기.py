@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-
+import csv
 import time
 # 크롬 드라이버 자동 업데이트
 from webdriver_manager.chrome import ChromeDriverManager
@@ -47,6 +47,10 @@ while True:
         break
     before_h = after_h
 
+# 엑셀 파일 생성
+f = open(r"C:\startcoding\03. 네이버 쇼핑 크롤링\data.csv", 'w', encoding='CP949', newline='')
+csvWriter = csv.writer(f)
+
 # 상품 정보 div
 items = driver.find_elements(By.CSS_SELECTOR, ".product_info_area__xxCTi")
 
@@ -58,3 +62,8 @@ for item in items:
         price = "판매중단"
     link = item.find_element(By.CSS_SELECTOR, ".product_title__Mmw2K > a").get_attribute('href')
     print(name, price, link)
+    # 데이터 쓰기
+    csvWriter.writerow([name, price, link])
+
+# 엑셀 파일 닫기
+f.close()
