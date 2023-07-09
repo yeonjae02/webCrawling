@@ -6,9 +6,9 @@ from selenium.webdriver.common.by import By
 # 크롬 드라이버 자동 업데이트
 from webdriver_manager.chrome import ChromeDriverManager
 
-# import time
-# import pyautogui
-# import pyperclip
+import time
+import pyautogui
+import pyperclip
 
 # 브라우저 꺼짐 방지
 chrome_options = Options()
@@ -28,12 +28,17 @@ driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https://www.naver
 # 아이디 입력 창
 id = driver.find_element(By.CSS_SELECTOR, "#id")
 id.click()
-id.send_keys("0yeonjae2") #키보드 입력
+pyperclip.copy("0yeonjae2")
+pyautogui.hotkey("ctrl", "v")
+time.sleep(2)
 
 # 비밀번호 입력 창
 pw = driver.find_element(By.CSS_SELECTOR, "#pw")
 pw.click()
-pw.send_keys("...") #키보드 입력
+pyperclip.copy("...")
+pyautogui.hotkey("ctrl", "v")
+time.sleep(2)
+
 
 # 로그인 
 login_btn= driver.find_element(By.CSS_SELECTOR, "#log\.login")
